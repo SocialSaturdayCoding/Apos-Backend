@@ -7,3 +7,13 @@ Agile Pizza Order Service Backend
 ```
 poetry install
 ```
+
+# Run the application
+
+
+```
+cd apos
+poetry run craft serve
+```
+
+You can skip the `poetry run`, if you enter the shell first with `poetry shell`
