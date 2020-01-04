@@ -199,6 +199,19 @@ whitenoise = ">=3.3,<5"
 
 [[package]]
 category = "main"
+description = ""
+name = "masonite-cli"
+optional = false
+python-versions = "*"
+version = "2.2.2"
+
+[package.dependencies]
+cleo = ">=0.6,<=0.6.99"
+cryptography = "*"
+requests = "*"
+
+[[package]]
+category = "main"
 description = "Validation Package"
 name = "masonite-dot"
 optional = false
@@ -521,7 +534,7 @@ python-versions = "*"
 version = "1.11.2"
 
 [metadata]
-content-hash = "88d216827395c14489950af3ddf94aedc8be8d4b19b6f9f67fcd8ca70a76ea46"
+content-hash = "86b957decf6ee9fa727f09443e8ef8470b09687b6726f0d6f6fe59702dbf69ea"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -694,6 +707,9 @@ markupsafe = [
 ]
 masonite = [
     {file = "masonite-2.2.31.tar.gz", hash = "sha256:62357eefa30fd55008d1aec5e463cfcb72b5df645ad144d0b49c3d168fff9eea"},
+]
+masonite-cli = [
+    {file = "masonite-cli-2.2.2.tar.gz", hash = "sha256:5524eea45f293afb0ac1fe69231b62f1000f2ec0ef5555c7d051874a14cc378f"},
 ]
 masonite-dot = [
     {file = "masonite-dot-0.0.4.tar.gz", hash = "sha256:8d0739c0e5912b49111443ca6c3bbb613e14a2ceafa10f78f27f22a114379482"},
