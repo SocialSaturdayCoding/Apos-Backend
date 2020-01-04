@@ -6,7 +6,10 @@ authors = ["Arne Beer <contact@arne.beer>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
+psycopg2 = "^2.8"
+masonite = "^2.2"
+
 
 [tool.poetry.dev-dependencies]
 
