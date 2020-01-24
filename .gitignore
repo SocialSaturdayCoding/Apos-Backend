@@ -5,4 +5,5 @@ venv
 .env.*
 .vscode
 .pytest_cache
+storage/logs/
 !.env.testing
