@@ -10,7 +10,7 @@ class VerifyEmailMiddleware:
         """Inject Any Dependencies From The Service Container.
 
         Arguments:
-            request {masonite.request.Request} -- The Masonite request class.
+            Request {masonite.request.Request} -- The Masonite request object
         """
         self.request = request
 

@@ -10,7 +10,7 @@ framework needs to place the application's name in a notification or
 any other location as required by the application or its packages.
 """
 
-NAME = env('APP_NAME', 'Masonite 2.2')
+NAME = env('APP_NAME', 'Masonite 2.3')
 
 """Application Debug Mode
 When your application is in debug mode, detailed error messages with
@@ -33,7 +33,7 @@ KEY = env('KEY', None)
 Sets the root URL of the application. This is primarily used for testing
 """
 
-URL = env('APP_URL', 'http://localhost:8000')
+URL = 'http://localhost:8000'
 
 """Base Directory
 Sets the root path of your project

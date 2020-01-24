@@ -11,8 +11,7 @@ class LoadUserMiddleware:
         """Inject Any Dependencies From The Service Container.
 
         Arguments:
-            request {masonite.request.Request} -- The Masonite request object.
-            auth {masonite.auth.Auth} -- The Masonite authentication object.
+            Request {masonite.request.Request} -- The Masonite request object.
         """
         self.request = request
         self.auth = auth

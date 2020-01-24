@@ -17,25 +17,19 @@ be authenticated.
 """
 
 AUTH = {
-    'driver': env('AUTH_DRIVER', 'cookie'),
-    'model': User,
+    'defaults': {
+        'guard': env('AUTH_GUARD', 'web')
+    },
     'guards': {
         'web': {
-        },
-        'api': {
-            'driver': 'jwt',
+            'driver': 'cookie',
             'model': User,
-        }
-    }
-}
-
-DRIVERS = {
-    'cookie': {},
-    'jwt': {
-        """Whether or not to reauthenticate with the database when the token expires."""
-        'reauthentication': True,
-
-        """How long the token should live for before being refreshed."""
-        'lifetime': '5 minutes'
+            'drivers': { # 'cookie', 'jwt'
+                'jwt': {
+                    'reauthentication': True,
+                    'lifetime': '5 minutes'
+                }
+            }
+        },
     }
 }
