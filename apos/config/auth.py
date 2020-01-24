@@ -19,6 +19,14 @@ be authenticated.
 AUTH = {
     'driver': env('AUTH_DRIVER', 'cookie'),
     'model': User,
+    'guards': {
+        'web': {
+        },
+        'api': {
+            'driver': 'jwt',
+            'model': User,
+        }
+    }
 }
 
 DRIVERS = {
