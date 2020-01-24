@@ -10,7 +10,7 @@ python = "^3.8"
 psycopg2 = "^2.8"
 masonite = "^2.2"
 masonite-cli = "^2.2"
-
+masonite-api = "^3.0"
 
 [tool.poetry.dev-dependencies]
 
