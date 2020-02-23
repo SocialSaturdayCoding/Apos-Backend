@@ -1,4 +1,4 @@
-from app import db
+from extensions import db
 
 
 class User(db.Model):
@@ -48,3 +48,14 @@ class Coupon(db.Model):
     deliverer = db.Column(db.String, nullable=False)
     coupon = db.Column(db.String, nullable=False)
     deadline = db.Column(db.DateTime, nullable=True)
+
+    @property
+    def serialize(self):
+        item = {
+            'id': self.id,
+            'deliverer': self.deliverer,
+            'coupon': self.coupon,
+        }
+        if self.deadline:
+            item['deadline'] = str(self.deadline)
+        return item
