@@ -7,6 +7,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 db = SQLAlchemy(app)
 
 
+from models import User, Item, Order, Coupon
+
+
 @app.route('/')
 def hello():
     return 'Hello World!'
