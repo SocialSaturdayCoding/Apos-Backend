@@ -9,7 +9,7 @@ from apos.models import Coupon
 parser = reqparse.RequestParser()
 parser.add_argument('deliverer', type=str, required=True)
 parser.add_argument('coupon', type=str, required=True)
-parser.add_argument('deadline', type=datetime.utcfromtimestamp)
+parser.add_argument('deadline', type=datetime.fromtimestamp)
 
 
 class CouponListResource(Resource):
