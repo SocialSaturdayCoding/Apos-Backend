@@ -34,6 +34,20 @@ class Order(db.Model):
     deliverer = db.Column(db.String, nullable=False)
     arrival = db.Column(db.DateTime, nullable=True)
 
+    @property
+    def serialize(self):
+        item = {
+            'id': self.id,
+            'owner': self.owner.serialize,
+            'location': self.location,
+            'deadline': self.deadline.strftime("%s"),
+            'description': self.description,
+            'title': self.title,
+            'deliverer': self.deliverer,
+            'arrival': self.arrival.strftime("%s")
+        }
+        return item
+
 
 class Item(db.Model):
     __tablename__ = 'items'
