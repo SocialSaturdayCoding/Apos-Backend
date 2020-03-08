@@ -5,13 +5,27 @@ from flask_restful import Resource, abort, reqparse
 from apos.extensions import db
 from apos.models import Order
 
-parser = reqparse.RequestParser()
-parser.add_argument('location', type=str, required=True)
-parser.add_argument('deadline', type=datetime.fromtimestamp)
-parser.add_argument('description', type=str, required=False)
-parser.add_argument('title', type=str, required=True)
-parser.add_argument('deliverer', type=str, required=True)
-parser.add_argument('arrival', type=datetime.fromtimestamp, required=False)
+parsers = {
+    'normal': {
+        'parser': reqparse.RequestParser(),
+        'strict': True,
+        },
+    'lazy': {
+        'parser': reqparse.RequestParser(),
+        'strict': False,
+        },
+}
+
+for mode in parsers.keys():
+    parser = parsers[mode]['parser']
+    strict = parsers[mode]['strict']
+
+    parser.add_argument('location', type=str, required=(True and strict))
+    parser.add_argument('deadline', type=datetime.fromtimestamp, required=(True and strict))
+    parser.add_argument('description', type=str, required=(False and strict))
+    parser.add_argument('title', type=str, required=(True and strict))
+    parser.add_argument('deliverer', type=str, required=(True and strict))
+    parser.add_argument('arrival', type=datetime.fromtimestamp, required=(False and strict))
 
 
 class OrderListResource(Resource):
@@ -20,7 +34,7 @@ class OrderListResource(Resource):
         return [order.serialize for order in orders]
 
     def put(self):
-        args = parser.parse_args()
+        args = parsers['normal']['parser'].parse_args()
         order = Order(owner_id=1, **args) # TODO
         db.session.add(order)
         db.session.commit()
@@ -40,4 +54,12 @@ class OrderResource(Resource):
         db.session.delete(order)
         db.session.commit()
         return '', 204
+
+    def patch(self, order_id):
+        args = parsers['lazy']['parser'].parse_args()
+        args = {k:v for k,v in args.items() if v is not None}
+        orders = Order.query.filter_by(id=order_id)
+        orders.update(args)
+        db.session.commit()
+        return orders.first().serialize
 
