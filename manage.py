@@ -17,6 +17,11 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def test():
+    pytest.cmdline.main([])
+
+
+@manager.command
+def test_ci():
     pytest.cmdline.main(['-q'])
 
 
