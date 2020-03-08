@@ -6,7 +6,6 @@ from flask_migrate import Migrate, Manager, MigrateCommand
 
 from apos.extensions import app, db
 
-app.config.from_object('apos.config.Config')
 MIGRATION_DIR = os.path.join('apos', 'migrations')
 
 migrate = Migrate(app, db, directory=MIGRATION_DIR)
