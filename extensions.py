@@ -11,5 +11,5 @@ app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 db = SQLAlchemy()
 db.init_app(app)
 bcrypt = Bcrypt()
-jwt = JWTManager()
+jwt = JWTManager(app)
 api = Api(app)
