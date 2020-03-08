@@ -14,6 +14,14 @@ python-editor = ">=0.3"
 
 [[package]]
 category = "main"
+description = "A library for parsing ISO 8601 strings."
+name = "aniso8601"
+optional = false
+python-versions = "*"
+version = "8.0.0"
+
+[[package]]
+category = "main"
 description = "Modern password hashing for your software and your servers"
 name = "bcrypt"
 optional = false
@@ -106,6 +114,23 @@ version = "2.5.2"
 Flask = ">=0.9"
 Flask-SQLAlchemy = ">=1.0"
 alembic = ">=0.7"
+
+[[package]]
+category = "main"
+description = "Simple framework for creating REST APIs"
+name = "flask-restful"
+optional = false
+python-versions = "*"
+version = "0.3.8"
+
+[package.dependencies]
+Flask = ">=0.8"
+aniso8601 = ">=0.82"
+pytz = "*"
+six = ">=1.3.0"
+
+[package.extras]
+docs = ["sphinx"]
 
 [[package]]
 category = "main"
@@ -225,6 +250,14 @@ version = "1.0.4"
 
 [[package]]
 category = "main"
+description = "World timezone definitions, modern and historical"
+name = "pytz"
+optional = false
+python-versions = "*"
+version = "2019.3"
+
+[[package]]
+category = "main"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
 optional = false
@@ -264,12 +297,16 @@ dev = ["pytest", "coverage", "tox", "sphinx", "pallets-sphinx-themes", "sphinx-i
 watchdog = ["watchdog"]
 
 [metadata]
-content-hash = "3984a7b43801a1fa2b49cb369ee89096e166fc17ea63df078edb05d8077aa0f9"
+content-hash = "0dee34a3ce47dfa143855f0b3fe7bc6950af050da98a945cc1006509c1888d48"
 python-versions = "^3.7"
 
 [metadata.files]
 alembic = [
     {file = "alembic-1.4.0.tar.gz", hash = "sha256:2df2519a5b002f881517693b95626905a39c5faf4b5a1f94de4f1441095d1d26"},
+]
+aniso8601 = [
+    {file = "aniso8601-8.0.0-py2.py3-none-any.whl", hash = "sha256:c033f63d028b9a58e3ab0c2c7d0532ab4bfa7452bfc788fbfe3ddabd327b181a"},
+    {file = "aniso8601-8.0.0.tar.gz", hash = "sha256:529dcb1f5f26ee0df6c0a1ee84b7b27197c3c50fc3a6321d66c544689237d072"},
 ]
 bcrypt = [
     {file = "bcrypt-3.1.7-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:d7bdc26475679dd073ba0ed2766445bb5b20ca4793ca0db32b399dccc6bc84b7"},
@@ -338,6 +375,10 @@ flask-jwt-extended = [
 flask-migrate = [
     {file = "Flask-Migrate-2.5.2.tar.gz", hash = "sha256:a96ff1875a49a40bd3e8ac04fce73fdb0870b9211e6168608cbafa4eb839d502"},
     {file = "Flask_Migrate-2.5.2-py2.py3-none-any.whl", hash = "sha256:6fb038be63d4c60727d5dfa5f581a6189af5b4e2925bc378697b4f0a40cfb4e1"},
+]
+flask-restful = [
+    {file = "Flask-RESTful-0.3.8.tar.gz", hash = "sha256:5ea9a5991abf2cb69b4aac19793faac6c032300505b325687d7c305ffaa76915"},
+    {file = "Flask_RESTful-0.3.8-py2.py3-none-any.whl", hash = "sha256:d891118b951921f1cec80cabb4db98ea6058a35e6404788f9e70d5b243813ec2"},
 ]
 flask-script = [
     {file = "Flask-Script-2.0.6.tar.gz", hash = "sha256:6425963d91054cfcc185807141c7314a9c5ad46325911bd24dcb489bd0161c65"},
@@ -419,6 +460,10 @@ python-editor = [
     {file = "python_editor-1.0.4-py2.7.egg", hash = "sha256:ea87e17f6ec459e780e4221f295411462e0d0810858e055fc514684350a2f522"},
     {file = "python_editor-1.0.4-py3-none-any.whl", hash = "sha256:1bf6e860a8ad52a14c3ee1252d5dc25b2030618ed80c022598f00176adc8367d"},
     {file = "python_editor-1.0.4-py3.5.egg", hash = "sha256:c3da2053dbab6b29c94e43c486ff67206eafbe7eb52dbec7390b5e2fb05aac77"},
+]
+pytz = [
+    {file = "pytz-2019.3-py2.py3-none-any.whl", hash = "sha256:1c557d7d0e871de1f5ccd5833f60fb2550652da6be2693c1e02300743d21500d"},
+    {file = "pytz-2019.3.tar.gz", hash = "sha256:b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be"},
 ]
 six = [
     {file = "six-1.14.0-py2.py3-none-any.whl", hash = "sha256:8f3cd2e254d8f793e7f3d6d9df77b92252b52637291d0f0da013c76ea2724b6c"},
