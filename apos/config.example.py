@@ -1,4 +1,4 @@
-from config_base import ConfigBase
+from apos.config_base import ConfigBase
 
 
 class Config(ConfigBase):

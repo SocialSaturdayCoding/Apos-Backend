@@ -3,8 +3,8 @@ from datetime import timedelta
 from flask_jwt_extended import create_access_token
 from flask_restful import Resource, reqparse, abort
 
-from extensions import db
-from models import User
+from apos.extensions import db
+from apos.models import User
 
 auth_parser = reqparse.RequestParser()
 auth_parser.add_argument('username', type=str, required=True)

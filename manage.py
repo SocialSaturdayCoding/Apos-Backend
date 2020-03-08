@@ -1,10 +1,14 @@
+#!/usr/bin/env python3
+import os
+
 from flask_migrate import Migrate, Manager, MigrateCommand
 
-from app import app, db
+from apos.extensions import app, db
 
-app.config.from_object('config.Config')
+app.config.from_object('apos.config.Config')
+MIGRATION_DIR = os.path.join('apos', 'migrations')
 
-migrate = Migrate(app, db)
+migrate = Migrate(app, db, directory=MIGRATION_DIR)
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)

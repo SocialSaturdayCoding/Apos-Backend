@@ -2,8 +2,8 @@ from datetime import datetime
 
 from flask_restful import Resource, abort, reqparse
 
-from extensions import db
-from models import Coupon
+from apos.extensions import db
+from apos.models import Coupon
 
 parser = reqparse.RequestParser()
 parser.add_argument('deliverer', type=str, required=True)
