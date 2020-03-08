@@ -8,7 +8,7 @@ from models import Coupon
 parser = reqparse.RequestParser()
 parser.add_argument('deliverer', type=str, required=True)
 parser.add_argument('coupon', type=str, required=True)
-parser.add_argument('deadline', type=datetime)
+parser.add_argument('deadline', type=datetime.utcfromtimestamp)
 
 
 class CouponListResource(Resource):

@@ -70,5 +70,5 @@ class Coupon(db.Model):
             'coupon': self.coupon,
         }
         if self.deadline:
-            item['deadline'] = str(self.deadline)
+            item['deadline'] = self.deadline.strftime("%s")
         return item
