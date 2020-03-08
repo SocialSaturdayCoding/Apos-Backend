@@ -3,7 +3,7 @@ import os
 
 from flask_migrate import Migrate, Manager, MigrateCommand
 
-from apos.extensions import app, db
+from apos.app import app, db
 
 app.config.from_object('apos.config.Config')
 MIGRATION_DIR = os.path.join('apos', 'migrations')

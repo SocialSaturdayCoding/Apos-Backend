@@ -1,4 +1,4 @@
-from apos.extensions import db, app, api
+from apos.extensions import app, api
 from apos.resources.coupons import CouponResource, CouponListResource
 from apos.resources.orders import OrderListResource, OrderResource
 from apos.resources.auth import Auth, Signup
