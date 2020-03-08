@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource, abort, reqparse
 
 from apos.extensions import db
@@ -12,22 +13,25 @@ parser.add_argument('deadline', type=datetime.utcfromtimestamp)
 
 
 class CouponListResource(Resource):
+    @jwt_required
     def get(self):
         coupons = Coupon.query.all()
         return [coupon.serialize for coupon in coupons]
 
+    @jwt_required
     def put(self):
         args = parser.parse_args()
         coupon = Coupon(deliverer=args['deliverer'],
                         coupon=args['coupon'],
                         deadline=args['deadline'],
-                        creator_id=1)
+                        creator_id=get_jwt_identity())
         db.session.add(coupon)
         db.session.commit()
         return coupon.serialize, 201
 
 
 class CouponResource(Resource):
+    @jwt_required
     def delete(self, coupon_id):
         coupon = Coupon.query.get(coupon_id)
         if not coupon:
