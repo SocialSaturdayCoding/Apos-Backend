@@ -16,6 +16,7 @@ flask-bcrypt = "^0.7.1"
 flask-jwt-extended = "^3.24.1"
 flask-restful = "^0.3.8"
 flask-httpauth = "^3.3.0"
+pytest = "^5.3.5"
 
 [tool.poetry.dev-dependencies]
 
