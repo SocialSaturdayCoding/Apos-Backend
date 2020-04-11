@@ -47,7 +47,7 @@ class OrderListResource(Resource):
 class OrderActiveListResource(Resource):
     @jwt_required
     def get(self):
-        orders = Order.query.filter(Order.deadline > datetime.utcnow()).all()
+        orders = Order.query.filter(Order.deadline > datetime.now()).all()
         return [order.serialize for order in orders]
 
 

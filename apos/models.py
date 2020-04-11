@@ -2,6 +2,8 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 
 from apos.extensions import db
 
+from datetime import datetime
+
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -40,12 +42,15 @@ class Order(db.Model):
             'id': self.id,
             'owner': self.owner.serialize,
             'location': self.location,
-            'deadline': self.deadline.strftime("%s"),
+            'deadline': self.deadline.timestamp(),
             'description': self.description,
             'title': self.title,
             'deliverer': self.deliverer,
-            'arrival': self.arrival.strftime("%s")
         }
+
+        if self.arrival:
+            item['arrival'] = self.arrival.timestamp()
+
         return item
 
 
@@ -97,5 +102,5 @@ class Coupon(db.Model):
             'coupon': self.coupon,
         }
         if self.deadline:
-            item['deadline'] = self.deadline.strftime("%s")
+            item['deadline'] = self.deadline.timestamp()
         return item
