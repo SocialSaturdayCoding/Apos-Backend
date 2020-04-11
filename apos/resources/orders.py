@@ -43,6 +43,14 @@ class OrderListResource(Resource):
         db.session.commit()
         return order.serialize, 201
 
+
+class OrderActiveListResource(Resource):
+    @jwt_required
+    def get(self):
+        orders = Order.query.filter(Order.deadline > datetime.utcnow()).all()
+        return [order.serialize for order in orders]
+
+
 class OrderResource(Resource):
     @jwt_required
     def get(self, order_id):
