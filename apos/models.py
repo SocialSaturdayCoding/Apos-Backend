@@ -65,6 +65,19 @@ class Item(db.Model):
     tip_absolute = db.Column(db.Integer, nullable=True)
     price = db.Column(db.Integer, nullable=True)
 
+    @property
+    def serialize(self):
+        item = {
+            'id': self.id,
+            'order': self.order.serialize,
+            'user': self.user.serialize,
+            'name': self.name,
+            'tip_percent': self.tip_percent,
+            'tip_absolute': self.tip_absolute,
+            'price': self.price,
+        }
+        return item
+
 
 class Coupon(db.Model):
     __tablename__ = 'coupons'
