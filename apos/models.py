@@ -69,7 +69,7 @@ class Item(db.Model):
     def serialize(self):
         item = {
             'id': self.id,
-            'order': self.order.serialize,
+            'order_id': self.order.id,
             'user': self.user.serialize,
             'name': self.name,
             'tip_percent': self.tip_percent,
