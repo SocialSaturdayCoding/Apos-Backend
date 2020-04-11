@@ -23,7 +23,10 @@ class Auth(Resource):
 
         expires = timedelta(days=7)
         access_token = create_access_token(identity=str(user.id), expires_delta=expires)
-        return {'token': access_token}, 200
+        return {
+                    'token': access_token,
+                    'user': user.serialize
+                }, 200
 
 
 class Signup(Resource):
