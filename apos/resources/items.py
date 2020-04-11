@@ -45,23 +45,23 @@ class ItemResource(Resource):
 
     @jwt_required
     def delete(self, order_id, item_id):
-        # Check if order is not expired TODO
         item = Item.query.filter_by(order_id=order_id, id=item_id).first()
         if not item:
             abort(404, message=f"Item {item_id} does not exist for order {order_id}")
+        if item.order.deadline < datetime.utcnow():
+            abort(422, message="The order is expired, so no items can be deleted")
         db.session.delete(item)
         db.session.commit()
         return '', 204
 
     @jwt_required
     def patch(self, order_id, item_id):
-        # Check if order is not expired TODO
         args = item_patch_parser.parse_args()
         args = {k:v for k,v in args.items() if v is not None}
-        item = Item.query.filter_by(id=item_id, order_id=order_id)
-        if item.first().order.deadline < datetime.utcnow():
+        item = Item.query.filter_by(id=item_id, order_id=order_id).first()
+        if item.order.deadline < datetime.utcnow():
             abort(422, message="The order is expired, so no items can be modified")
         item.update(args)
         db.session.commit()
-        return item.first().serialize
+        return item.serialize
 
