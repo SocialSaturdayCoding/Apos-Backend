@@ -60,7 +60,7 @@ class Item(db.Model):
     user = db.relationship('User', backref='items')
     name = db.Column(db.String, nullable=False)
     # tip in percent
-    tip_percent = db.Column(db.Integer, nullable=True)
+    tip_percent = db.Column(db.Integer, nullable=True)  # Warum ist der price nullable?
     # tip in cents
     tip_absolute = db.Column(db.Integer, nullable=True)
     price = db.Column(db.Integer, nullable=True)
