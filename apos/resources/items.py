@@ -6,24 +6,16 @@ from flask_restful import Resource, abort, reqparse
 from apos.extensions import db
 from apos.models import Item, Order
 
-parsers = {
-    'normal': {
-        'parser': reqparse.RequestParser(),
-        'strict': True,
-        },
-    'lazy': {
-        'parser': reqparse.RequestParser(),
-        'strict': False,
-        },
-}
+item_create_parser = reqparse.RequestParser()
+item_create_parser.add_argument('name', type=str, required=True)
+item_create_parser.add_argument('tip_percent', type=int, required=False)
+item_create_parser.add_argument('price', type=int, required=False) # Why is the price false?
 
-for mode in parsers.keys():
-    parser = parsers[mode]['parser']
-    strict = parsers[mode]['strict']
+item_patch_parser = reqparse.RequestParser()
+item_patch_parser.add_argument('name', type=str, required=False)
+item_patch_parser.add_argument('tip_percent', type=int, required=False)
+item_patch_parser.add_argument('price', type=int, required=False)
 
-    parser.add_argument('name', type=str, required=(True and strict))
-    parser.add_argument('tip_percent', type=int, required=(False and strict))
-    parser.add_argument('price', type=int, required=(False and strict))
 
 
 class ItemListResource(Resource):
@@ -34,7 +26,7 @@ class ItemListResource(Resource):
 
     @jwt_required
     def put(self, order_id):
-        args = parsers['normal']['parser'].parse_args()
+        args = item_create_parser.parse_args()
         order = Order.query.get(order_id)
         if order.deadline < datetime.utcnow():
             abort(422, message="The order is expired, so no items can be added")
@@ -64,7 +56,7 @@ class ItemResource(Resource):
     @jwt_required
     def patch(self, order_id, item_id):
         # Check if order is not expired TODO
-        args = parsers['lazy']['parser'].parse_args()
+        args = item_patch_parser.parse_args()
         args = {k:v for k,v in args.items() if v is not None}
         item = Item.query.filter_by(id=item_id, order_id=order_id)
         if item.first().order.deadline < datetime.utcnow():

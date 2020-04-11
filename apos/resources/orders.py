@@ -38,6 +38,7 @@ class OrderListResource(Resource):
     @jwt_required
     def put(self):
         args = parsers['normal']['parser'].parse_args()
+        if 
         order = Order(owner_id=get_jwt_identity(), **args)
         db.session.add(order)
         db.session.commit()
