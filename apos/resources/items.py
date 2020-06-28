@@ -35,6 +35,14 @@ class ItemListResource(Resource):
         db.session.commit()
         return item.serialize, 201
 
+
+class ItemUserListResource(Resource):
+    @jwt_required
+    def get(self):
+        items = Item.query.filter_by(Item.user_id == get_jwt_identity()).all()
+        return [item.serialize for item in items]
+
+
 class ItemResource(Resource):
     @jwt_required
     def get(self, order_id, item_id):

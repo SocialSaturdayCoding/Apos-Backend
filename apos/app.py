@@ -1,7 +1,7 @@
 from apos.extensions import app, api
 from apos.resources.coupons import CouponResource, CouponListResource
-from apos.resources.orders import OrderListResource, OrderResource, OrderActiveListResource
-from apos.resources.items import ItemListResource, ItemResource
+from apos.resources.orders import OrderListResource, OrderUserListResource, OrderResource, OrderActiveListResource
+from apos.resources.items import ItemListResource, ItemUserListResource, ItemResource
 from apos.resources.auth import Auth, Signup
 
 api.add_resource(CouponResource, '/api/v1/coupons/<int:coupon_id>')
@@ -11,6 +11,8 @@ api.add_resource(OrderActiveListResource, '/api/v1/orders/active')
 api.add_resource(OrderResource, '/api/v1/orders/<int:order_id>')
 api.add_resource(ItemListResource, '/api/v1/orders/<int:order_id>/items')
 api.add_resource(ItemResource, '/api/v1/orders/<int:order_id>/items/<int:item_id>')
+api.add_resource(OrderUserListResource, '/api/v1/user/orders')
+api.add_resource(ItemUserListResource, '/api/v1/user/items')
 api.add_resource(Auth, '/api/v1/auth')
 api.add_resource(Signup, '/api/v1/signup')
 
