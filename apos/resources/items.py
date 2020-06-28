@@ -39,7 +39,7 @@ class ItemListResource(Resource):
 class ItemUserListResource(Resource):
     @jwt_required
     def get(self):
-        items = Item.query.filter_by(Item.user_id == get_jwt_identity()).all()
+        items = Item.query.filter_by(user_id=get_jwt_identity()).all()
         return [item.serialize for item in items]
 
 

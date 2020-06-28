@@ -54,7 +54,7 @@ class OrderActiveListResource(Resource):
 class OrderUserListResource(Resource):
     @jwt_required
     def get(self):
-        orders = Order.query.filter(Order.owner == get_jwt_identity()).all()
+        orders = Order.query.filter(Order.owner_id == get_jwt_identity()).all()
         return [order.serialize for order in orders]
 
 
