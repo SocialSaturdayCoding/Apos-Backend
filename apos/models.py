@@ -75,6 +75,7 @@ class Item(db.Model):
         item = {
             'id': self.id,
             'order_id': self.order.id,
+            'order': self.order.serialize,
             'user': self.user.serialize,
             'name': self.name,
             'tip_percent': self.tip_percent,
