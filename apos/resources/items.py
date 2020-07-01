@@ -9,11 +9,13 @@ from apos.models import Item, Order
 item_create_parser = reqparse.RequestParser()
 item_create_parser.add_argument('name', type=str, required=True)
 item_create_parser.add_argument('tip_percent', type=int, required=False)
+item_create_parser.add_argument('tip_absolute', type=int, required=False)
 item_create_parser.add_argument('price', type=int, required=False) # Why is the price false?
 
 item_patch_parser = reqparse.RequestParser()
 item_patch_parser.add_argument('name', type=str, required=False)
 item_patch_parser.add_argument('tip_percent', type=int, required=False)
+item_patch_parser.add_argument('tip_absolute', type=int, required=False)
 item_patch_parser.add_argument('price', type=int, required=False)
 
 
@@ -30,10 +32,20 @@ class ItemListResource(Resource):
         order = Order.query.get(order_id)
         if order.deadline < datetime.utcnow():
             abort(422, message="The order is expired, so no items can be added")
+        if args.get("tip_absolute", None) and args.get("tip_percent", None):
+            abort(422, message="The tip can only be provided in percent OR absolute value")
         item = Item(order_id=order_id, user_id=get_jwt_identity(), **args)
         db.session.add(item)
         db.session.commit()
         return item.serialize, 201
+
+
+class ItemUserListResource(Resource):
+    @jwt_required
+    def get(self):
+        items = Item.query.filter_by(user_id=get_jwt_identity()).all()
+        return [item.serialize for item in items]
+
 
 class ItemResource(Resource):
     @jwt_required
@@ -62,6 +74,7 @@ class ItemResource(Resource):
         if item.order.deadline < datetime.utcnow():
             abort(422, message="The order is expired, so no items can be modified")
         item.update(args)
+        if item.tip_absolute and item.tip_percent:
+            abort(422, message="The tip can only be provided in percent OR a absolute value. Take care that not both are set in the db.")
         db.session.commit()
         return item.serialize
-
