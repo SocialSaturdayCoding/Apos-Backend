@@ -33,7 +33,7 @@ class ItemListResource(Resource):
         if order.deadline < datetime.utcnow():
             abort(422, message="The order is expired, so no items can be added")
         if args.get("tip_absolute", None) and args.get("tip_percent", None):
-            abort(422, message="The tip can only be provided in percent OR a absolute value")
+            abort(422, message="The tip can only be provided in percent OR absolute value")
         item = Item(order_id=order_id, user_id=get_jwt_identity(), **args)
         db.session.add(item)
         db.session.commit()
