@@ -1,10 +1,13 @@
 import pytest
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug import Client
 
-from apos.extensions import app, db
+from apos.app import app, db
+from tests.data import import_data
 
 
 @pytest.fixture(scope='function')
-def client():
+def client() -> Client:
     """
     The test client used to send test requests to the APOS backend app.
     """
@@ -17,13 +20,17 @@ def client():
 
 
 @pytest.fixture(scope='function', autouse=True)
-def init_database(client):
+def database(client) -> SQLAlchemy:
     """
     This fixture sets up the database for testing.
     :param client: The test client (we need to make sure that the client fixture runs first).
     """
     db.create_all()
-    # TODO: Maybe insert test data?
     yield db
     db.session.remove()
     db.drop_all()
+
+
+@pytest.fixture(scope='function')
+def test_data(client, database):
+    import_data(database.session)

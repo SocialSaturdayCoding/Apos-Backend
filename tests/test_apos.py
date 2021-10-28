@@ -1,7 +1,10 @@
-from werkzeug.test import Client
-from werkzeug.wrappers import Response
+from werkzeug import Client, Response
 
 
 def test_root(client: Client):
-    rv: Response = client.get('/')
-    assert rv.status_code == 404
+    response: Response = client.get('/')
+    assert response.status_code == 404
+    response = client.get('/api')
+    assert response.status_code == 404
+    response = client.get('/api/v1')
+    assert response.status_code == 404
